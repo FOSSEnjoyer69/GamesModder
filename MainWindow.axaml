@@ -1,0 +1,37 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="GamesModder.MainWindow"
+        Title="Games Modder">
+
+    <TabControl>
+        <TabItem>
+            <TabItem.Header>
+                <Image Source="avares://GamesModder/Assets/Telltale_Logo.png" Width="128" Height="128"/>
+            </TabItem.Header>
+
+            <TabControl>
+                <TabItem Header="Games">
+                    <TabControl>
+                        <TabItem>
+                            <TabItem.Header>
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="avares://GamesModder/Assets/TWD_DE.jpeg" Height="512"/>
+                                    <TextBox Watermark="game install path..." x:Name="TWDDEInstallPath"/>
+                                </StackPanel>
+                            </TabItem.Header>
+
+                            <TabControl>
+                                <TabItem Header="Tools">
+                                    <StackPanel Orientation="Vertical" Spacing="8">
+                                        <CheckBox Content="Load Any Level" x:Name="LoadAnyLevelBtn"/>
+                                    </StackPanel>
+                                </TabItem>
+                            </TabControl>
+
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+            </TabControl>
+        </TabItem>
+    </TabControl>
+</Window>
