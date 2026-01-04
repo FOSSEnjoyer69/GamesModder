@@ -22,13 +22,13 @@
 
                             <TabControl>
                                 <TabItem Header="Tools">
-                                    <StackPanel Orientation="Vertical" Spacing="8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
                                         <CheckBox Content="Load Any Level" x:Name="TWDDELoadAnyLevelToggle"/>
                                         <CheckBox Content="Season 4 Graphic Black" x:Name="TWDDEGraphicBlack"/>
+                                        <CheckBox Content="Black Lines" x:Name="TWDDEBlackLines"/>
                                     </StackPanel>
                                 </TabItem>
                             </TabControl>
-
                         </TabItem>
                     </TabControl>
                 </TabItem>

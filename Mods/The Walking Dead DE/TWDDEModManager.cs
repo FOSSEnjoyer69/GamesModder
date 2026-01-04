@@ -10,6 +10,8 @@ public static class TWDDEModManager
     public static bool IsGraphicBlackDisablerInstalled(string installPath) => IsModInstalled(installPath, "Mods/The Walking Dead DE/GraphicBlackDisabler.zip");
     public static bool InstallGraphicBlackDisabler(string installPath, bool install) => InstallMod(installPath, "Mods/The Walking Dead DE/GraphicBlackDisabler.zip", install);
 
+    public static bool IsNoBlackLinesInstalled(string installPath) => IsModInstalled(installPath, "Mods/The Walking Dead DE/NoBlackLine.zip");
+    public static bool InstallNoBlackLines(string installPath, bool install) => InstallMod(installPath, "Mods/The Walking Dead DE/NoBlackLine.zip", install);
 
     public static bool IsModInstalled(string gameInstallPath, string modZipPath)
     {

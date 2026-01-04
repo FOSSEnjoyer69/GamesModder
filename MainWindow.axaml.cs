@@ -13,8 +13,14 @@ public partial class MainWindow : Window
 
                 TWDDEInstallPath.TextChanged += (s, e) =>
                 {
-                        TWDDELoadAnyLevelToggle.IsChecked = TWDDEModManager.IsLoadAnyLevelInstalled(TWDDEInstallPath.Text);
-                        TWDDEGraphicBlack.IsChecked = !TWDDEModManager.IsGraphicBlackDisablerInstalled(TWDDEInstallPath.Text);
+                        if (string.IsNullOrEmpty(TWDDEInstallPath.Text))
+                                return;
+
+                        string path = TWDDEInstallPath.Text;
+
+                        TWDDELoadAnyLevelToggle.IsChecked = TWDDEModManager.IsLoadAnyLevelInstalled(path);
+                        TWDDEGraphicBlack.IsChecked = !TWDDEModManager.IsGraphicBlackDisablerInstalled(path);
+                        TWDDEBlackLines.IsChecked = !TWDDEModManager.IsNoBlackLinesInstalled(path);
                 };
 
                 TWDDELoadAnyLevelToggle.IsCheckedChanged += (s, e) =>
@@ -35,6 +41,16 @@ public partial class MainWindow : Window
 
                         bool enable = !(TWDDEGraphicBlack.IsChecked ?? false);
                         TWDDEModManager.InstallGraphicBlackDisabler(twddeArchivePath, enable);
+                };
+
+                TWDDEBlackLines.IsCheckedChanged += (s, e) =>
+                {
+                        string? twddeArchivePath = TWDDEInstallPath.Text;
+                        if (twddeArchivePath is null)
+                                return;
+
+                        bool enable = !(TWDDEBlackLines.IsChecked ?? false);
+                        TWDDEModManager.InstallNoBlackLines(twddeArchivePath, enable);
                 };
         }
 
