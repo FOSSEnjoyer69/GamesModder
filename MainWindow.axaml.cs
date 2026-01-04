@@ -1,13 +1,10 @@
-using System;
 using System.IO;
-using System.IO.Compression;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using CSharpAlgorithms.Computer;
 using CSharpAlgorithms.Media.Images;
+using Mods.The_Walking_Dead_DE;
 
 namespace GamesModder;
-
 public partial class MainWindow : Window
 {
         public MainWindow()
@@ -16,24 +13,28 @@ public partial class MainWindow : Window
 
                 TWDDEInstallPath.TextChanged += (s, e) =>
                 {
-                        LoadAnyLevelBtn.IsChecked = DirectoryUtils.ContainsTemplate(ZipFile.OpenRead("Mods/The Walking Dead DE/Load Any Level 3.2.1-7-3-2-1-1633464184.zip"), $"{TWDDEInstallPath.Text}/Archives");
+                        TWDDELoadAnyLevelToggle.IsChecked = TWDDEModManager.IsLoadAnyLevelInstalled(TWDDEInstallPath.Text);
+                        TWDDEGraphicBlack.IsChecked = !TWDDEModManager.IsGraphicBlackDisablerInstalled(TWDDEInstallPath.Text);
                 };
 
-                LoadAnyLevelBtn.IsCheckedChanged += (s, e) =>
+                TWDDELoadAnyLevelToggle.IsCheckedChanged += (s, e) =>
                 {
-                        string twddeArchivePath = $"{TWDDEInstallPath.Text}/Archives";
+                        string? twddeArchivePath = TWDDEInstallPath.Text;
+                        if (twddeArchivePath is null)
+                                return;
 
-                        bool enable = LoadAnyLevelBtn.IsChecked ?? false;
-                        Console.WriteLine(enable);
-                        switch (enable)
-                        {
-                                case true:
-                                        ZipUtils.UnzipAndCopyFiles("Mods/The Walking Dead DE/Load Any Level 3.2.1-7-3-2-1-1633464184.zip", twddeArchivePath);
-                                        break;
-                                case false:
-                                        DirectoryUtils.DeleteUsingTemplate(ZipFile.OpenRead("Mods/The Walking Dead DE/Load Any Level 3.2.1-7-3-2-1-1633464184.zip"), twddeArchivePath);
-                                        break;
-                        }
+                        bool enable = TWDDELoadAnyLevelToggle.IsChecked ?? false;
+                        TWDDEModManager.InstallLoadAnyLevel(twddeArchivePath, enable);
+                };
+
+                TWDDEGraphicBlack.IsCheckedChanged += (s, e) =>
+                {
+                        string? twddeArchivePath = TWDDEInstallPath.Text;
+                        if (twddeArchivePath is null)
+                                return;
+
+                        bool enable = !(TWDDEGraphicBlack.IsChecked ?? false);
+                        TWDDEModManager.InstallGraphicBlackDisabler(twddeArchivePath, enable);
                 };
         }
 

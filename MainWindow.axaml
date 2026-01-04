@@ -23,7 +23,8 @@
                             <TabControl>
                                 <TabItem Header="Tools">
                                     <StackPanel Orientation="Vertical" Spacing="8">
-                                        <CheckBox Content="Load Any Level" x:Name="LoadAnyLevelBtn"/>
+                                        <CheckBox Content="Load Any Level" x:Name="TWDDELoadAnyLevelToggle"/>
+                                        <CheckBox Content="Season 4 Graphic Black" x:Name="TWDDEGraphicBlack"/>
                                     </StackPanel>
                                 </TabItem>
                             </TabControl>
