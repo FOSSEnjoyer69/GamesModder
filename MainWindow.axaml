@@ -28,6 +28,22 @@
                                         <CheckBox Content="Black Lines" x:Name="TWDDEBlackLines"/>
                                     </StackPanel>
                                 </TabItem>
+                                <TabItem Header="Characters">
+                                    <StackPanel>
+                                        <TabControl>
+                                            <TabItem>
+                                                <TabItem.Header>
+                                                    <Image Source="avares://GamesModder/Assets/TWD_FS_Clementine.jpeg" Height="256"/>
+                                                </TabItem.Header>
+                                                <StackPanel>
+                                                    <Slider Minimum="0" Maximum="255" x:Name="TWDDECharacterEyeColourSliderR"/>
+                                                    <Slider Minimum="0" Maximum="255" x:Name="TWDDECharacterEyeColourSliderG" />
+                                                    <Slider Minimum="0" Maximum="255" x:Name="TWDDECharacterEyeColourSliderB" />
+                                                </StackPanel>
+                                            </TabItem>
+                                        </TabControl>
+                                    </StackPanel>
+                                </TabItem> 
                             </TabControl>
                         </TabItem>
                     </TabControl>

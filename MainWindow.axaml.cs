@@ -1,8 +1,11 @@
-using System.IO;
 using Avalonia.Controls;
-using Avalonia.Interactivity;
+using CSharpAlgorithms.Biology.Animalia.Chordata.Mammalia.Primates.Hominidae.Homo.HomoSapiens;
+using CSharpAlgorithms.Math;
 using CSharpAlgorithms.Media.Images;
 using Mods.The_Walking_Dead_DE;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using Image = SixLabors.ImageSharp.Image;
 
 namespace GamesModder;
 public partial class MainWindow : Window
@@ -10,6 +13,20 @@ public partial class MainWindow : Window
         public MainWindow()
         {
                 InitializeComponent();
+
+                Image<Rgba32> image = Image.Load<Rgba32>("Assets/Game Assets/Telltale/The Walking Dead/Defintive Edition/The Final Season/sk62_clementine400_eyes.png");
+                Image<Rgba32> mask = Image.Load<Rgba32>("Assets/Game Assets/Telltale/The Walking Dead/Defintive Edition/The Final Season/sk62_clementine400_eyes - Iris Mask.png");
+                ImageEditor imageEditor = new(image);
+
+                //imageEditor.SetSaturation(0, mask);
+                HSLColour eyeColour = HomoSapiensEyes.ColourDictionary["Grey"];
+                //Console.WriteLine(eyeColour);
+                //Rgba32 colourized = ColourConverter.HSV_To_RGBA32(eyeColour, 255);
+                //Console.WriteLine(colourized);
+                imageEditor.Colourize(eyeColour, opacity: 1f, mask: mask, lightnessShift: 0f);
+
+                image.SaveAsPng("result 1.png");
+
 
                 TWDDEInstallPath.TextChanged += (s, e) =>
                 {
@@ -52,28 +69,5 @@ public partial class MainWindow : Window
                         bool enable = !(TWDDEBlackLines.IsChecked ?? false);
                         TWDDEModManager.InstallNoBlackLines(twddeArchivePath, enable);
                 };
-        }
-
-        private async void OpenLoadFile(object? sender, RoutedEventArgs e)
-        {
-                var dialog = new OpenFileDialog
-                {
-                        Title = "Select A File",
-                        AllowMultiple = false,
-                        Filters =
-                        {
-                                new FileDialogFilter { Name = ".d3dtx Files", Extensions = { "d3dtx" } },
-                                new FileDialogFilter { Name = "All Files", Extensions = { "*" } }
-                        }
-                };
-
-                string[] resultFilePaths = await dialog.ShowAsync(this);
-                if (resultFilePaths is null || resultFilePaths.Length == 0)
-                        return;
-
-                string filePath = resultFilePaths[0];
-                string fileNameWithExtension = Path.GetFileName(filePath);
-
-                ImageConverter.D3DTX_To_DDS(filePath, $"Output/{fileNameWithExtension}");
         }
 }
