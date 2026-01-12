@@ -35,10 +35,14 @@
                                                 <TabItem.Header>
                                                     <Image Source="avares://GamesModder/Assets/TWD_FS_Clementine.jpeg" Height="256"/>
                                                 </TabItem.Header>
-                                                <StackPanel>
-                                                    <Slider Minimum="0" Maximum="255" x:Name="TWDDECharacterEyeColourSliderR"/>
-                                                    <Slider Minimum="0" Maximum="255" x:Name="TWDDECharacterEyeColourSliderG" />
-                                                    <Slider Minimum="0" Maximum="255" x:Name="TWDDECharacterEyeColourSliderB" />
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Eye Colour:" Margin="0,0,0,8"/> 
+                                                    <ComboBox x:Name="ClementineFSEyeColour" SelectedIndex="1" SelectionChanged="ClementineFSEyeColourChanged">
+                                                        <ComboBoxItem>Blue</ComboBoxItem>
+                                                        <ComboBoxItem>Brown</ComboBoxItem>
+                                                        <ComboBoxItem>Grey</ComboBoxItem>
+                                                        <ComboBoxItem>Hazel</ComboBoxItem>
+                                                    </ComboBox>
                                                 </StackPanel>
                                             </TabItem>
                                         </TabControl>
